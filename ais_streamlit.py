@@ -44,6 +44,7 @@ os.chdir(CODE_DIR)
 pugetCsv = DATA_DIR + 'AIS_PUGET_2020_01_06.csv'
 bufferWidth = 0.03  # Euclidean buffer - equivalent to 2 nautical miles around a shipping lane
 warnings.filterwarnings("ignore")
+st.set_page_config(layout="wide")
 # pd.options.mode.chained_assignment = None
 
 # Helper function to flatten nested lists
@@ -616,6 +617,7 @@ if __name__ == "__main__":
     # streamlit-folium
     # This Component uses components.html to take the HTML generated from a folium.Map or 
     # folium.Figure object render() method, and display it as-is within Streamlit.
+
     vcats = np.sort(motion_puget_pdf.loc[(motion_puget_pdf.sog > 2.0), 'vessel_category'].unique())
     vcat2TrackLengths = {vcat:motion_puget_pdf.loc[(motion_puget_pdf.sog > 2.0) & (motion_puget_pdf['vessel_category']==vcat), 'mmsi'].value_counts() for vcat in vcats}
     vcat2mmsis = {vcat:vcat2TrackLengths[vcat][vcat2TrackLengths[vcat] >= 25] for vcat in vcat2TrackLengths.keys()}
@@ -645,6 +647,9 @@ if __name__ == "__main__":
     The pink dot is the start of the trip or segment. The tooltip on the dot uses local time (Pacific).
 
     To change the base layer, click on the expander icon (topleft)
+
+    For best viewing, set your layout to wide: 
+    Streamlit Hamburger (topright) -> Settings -> Appearance = Wide Mode
     """)
 
     col1, col2, col3 = st.beta_columns([4,1,4])
