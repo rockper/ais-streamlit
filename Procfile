@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run ais_heroku.py
+web: sh setup.sh && streamlit run ais_streamlit.py
